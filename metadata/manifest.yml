@@ -1,0 +1,69 @@
+---
+Name: diy-mule
+Cartridge-Short-Name: DIY_MULE
+Cartridge-Version: 0.0.1
+Compatible-Versions:
+- '0.0.1'
+Cartridge-Vendor: rafdegan
+Display-Name: Do-It-Yourself 0.1 MULE
+Description: The Do-It-Yourself (DIY) application type is a blank slate for trying
+  unsupported languages, frameworks, and middleware on OpenShift. See the community
+  site for examples of bringing your favorite framework to OpenShift (MULE).
+Version: '3.7.0'
+License: "Common Public Attribution License, version 1.0"
+License-Url: https://opensource.org/licenses/CPAL-1.0
+Vendor: MuleSoft
+Categories:
+- web_framework
+- experimental
+Website: 
+Help-Topics:
+  Getting Started: https://www.openshift.com/videos/getting-started-with-diy-applications-on-openshift
+Provides:
+- diy-mule-0.1
+Publishes: 
+Subscribes:
+  set-env:
+    Type: ENV:*
+    Required: false
+Scaling:
+  Min: 1
+  Max: 1
+Group-Overrides:
+- components:
+  - web-proxy
+Endpoints:
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Protocols:
+  - http
+  - ws
+  Options:
+    primary: true
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+    Options:
+      websocket: true
+  - Frontend: /health
+    Backend: ''
+    Options:
+      health: true
+- Private-IP-Name: MIP
+  Private-Port-Name: MPORT
+  Private-Port: 32000
+  Public-Port-Name: MPROXY_PORT
+  Protocols:
+  - http
+#  - ws
+#  - https
+#  - wss
+#  - tls
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+#    Options:
+#      websocket: true
+Source-Url: git@github.com:maxohotm/diy-mule.git
